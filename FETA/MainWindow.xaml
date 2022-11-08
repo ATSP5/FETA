@@ -1,0 +1,59 @@
+﻿<Window x:Class="FETA.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FETA"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:modelViews="clr-namespace:FETA.ViewModel"
+        xmlns:views="clr-namespace:FETA.View"
+        Title="File Encryption Tool Advanced - FETA" Height="450" Width="800">
+    <Window.Resources>
+
+        <DataTemplate x:Name="aboutViewTemplate"
+                      DataType="{x:Type modelViews:AboutViewModel}">
+            <views:AboutView DataContext="{Binding}" />
+        </DataTemplate>
+
+        <DataTemplate x:Name="encryptDecryptViewTemplate"
+                      DataType="{x:Type modelViews:EncryptDecryptViewModel}">
+            <views:EncryptDecryptView DataContext="{Binding}" />
+        </DataTemplate>
+
+    </Window.Resources>
+
+    <DockPanel Background="#FF010030">
+        <StackPanel DockPanel.Dock="Left"
+                    Orientation="Vertical"
+                    Background="#99393838">
+
+            <Button Content="{materialDesign:PackIcon Kind=Encryption,Size=30}"
+                    ToolTip="Encrypt Decrypt"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Foreground="White"
+                    Margin="0,0,0,10"
+                    Name="btnEncryptDecrypt"
+                    Width="60"
+                    Height="40"
+                    Click="btnEncryptDecrypt_Click"
+                     />
+            
+            <Button Content="{materialDesign:PackIcon Kind=About,Size=30}"
+                    ToolTip="About"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Foreground="White"
+                    Margin="0,0,0,10"
+                    Name="btnAbout"
+                    Width="60"
+                    Height="40"
+                    Click="btnAbout_Click"
+                     />
+        </StackPanel>
+        <Grid>
+            <ContentControl Content="{Binding}" />
+        </Grid>
+    </DockPanel>
+</Window>
