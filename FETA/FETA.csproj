@@ -65,6 +65,8 @@
     </ApplicationDefinition>
     <Compile Include="Controllers\INotufyPropertyChangedImplementation.cs" />
     <Compile Include="Controllers\RelayCommand.cs" />
+    <Compile Include="Converters\EDActionConverter.cs" />
+    <Compile Include="Model\EncryptDecryptModel.cs" />
     <Compile Include="ViewModel\AboutViewModel.cs" />
     <Compile Include="ViewModel\EncryptDecryptViewModel.cs" />
     <Compile Include="ViewModel\NavigationMenu.cs" />
@@ -124,7 +126,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataModel\" />
-    <Folder Include="Model\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
