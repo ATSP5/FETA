@@ -15,7 +15,7 @@ namespace FETA.ViewModel
     public class EncryptDecryptViewModel
     {
         public EncryptDecryptModel EncryptDecryptModel_O { get; set; }
-        private FileTransactionService _fileTransactionService;
+        private IFileTransactionService _fileTransactionService;
         public EncryptDecryptViewModel()
         {
             EncryptDecryptModel_O = new EncryptDecryptModel();
@@ -97,6 +97,7 @@ namespace FETA.ViewModel
                                 if(o is PasswordBox)
                                 {
                                     var psswBox = (o as PasswordBox);
+
                                 }
                             },
                             (object o) =>

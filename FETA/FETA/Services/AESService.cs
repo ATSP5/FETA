@@ -10,36 +10,55 @@ namespace FETA.Services
 {
     public interface IAESService
     {
-        (bool isSuccesful, string msg, byte[] result) Encrypt(string plainText, string Key);
-        (bool IsSuccesful, string msg, byte[]) Decrypt(byte[] plainText, string Key);
+        (bool isSuccesful, string msg, byte[] secretText) Encrypt(string plainText, string Key);
+        (bool isSuccesful, string msg, string plainText) Decrypt(byte[] secretText, string Key);
     }
     public class AESService : IAESService
     {
-        public (bool isSuccesful, string msg, byte[] result) Encrypt(string plainText, string Key)
+        public (bool isSuccesful, string msg, byte[] secretText) Encrypt(string plainText, string Key)
         {
-            (bool isSuccesful, string msg, byte[] result) Result = new() { isSuccesful = false, msg = "", result = null };
+            (bool isSuccesful, string msg, byte[] secretText) Result = new() { isSuccesful = false, msg = "", secretText = null };
             try
             {
-                // Create Aes that generates a new key and initialization vector (IV).    
-                // Same key must be used in encryption and decryption    
                 using (AesManaged aes = new AesManaged())
                 {
                     // Encrypt string    
-                    byte[] encrypted = EncryptRoutine(plainText, aes.Key, aes.IV);
-                    // Print encrypted string    
-                    //Console.WriteLine($ "Encrypted data: {System.Text.Encoding.UTF8.GetString(encrypted)}");
+                    aes.BlockSize = 256;
+                    aes.KeySize = 16;
+                    Result.secretText = EncryptRoutine(plainText,Adjust(Key, aes.KeySize), aes.IV);
+                    Result.isSuccesful = true;
+                    Result.msg = "OK";
                 }
             }
             catch (Exception exp)
             {
-                //Console.WriteLine(exp.Message);
+                Result.isSuccesful =false;
+                Result.msg = exp.Message;
             }
             return Result;
         }
 
-        public (bool IsSuccesful, string msg, byte[]) Decrypt(byte[] plainText, string Key)
+        public (bool isSuccesful, string msg, string plainText) Decrypt(byte[] secretText, string Key)
         {
-            throw new NotImplementedException();
+            (bool isSuccesful, string msg, string plainText) Result = new() { isSuccesful = false, msg = "", plainText = "" };
+            try
+            {
+                using (AesManaged aes = new AesManaged())
+                {
+                    // Encrypt string    
+                    aes.BlockSize = 256;
+                    aes.KeySize = 16;
+                    Result.plainText= DecryptRoutine(secretText,Adjust(Key, aes.KeySize), aes.IV);
+                    Result.isSuccesful = true;
+                    Result.msg = "OK";
+                }
+            }
+            catch (Exception exp)
+            {
+                Result.isSuccesful = false;
+                Result.msg = exp.Message;
+            }
+            return Result;
         }
         private byte[] EncryptRoutine(string plainText, byte[] Key, byte[] IV)
         {
@@ -90,6 +109,21 @@ namespace FETA.Services
             return plaintext;
         }
 
-       
+       private byte [] Adjust(string value, int length)
+        {
+            byte[] buffer = new byte[length];
+            for(int i = 0; i < length; i++)
+            {
+                if(value[i] != 0)
+                {
+                    buffer[i] = (byte)value[i];
+                }
+                else
+                {
+                    buffer[i] = (byte)value[i%value.Length];
+                }
+            }
+            return buffer;
+        }
     }
 }

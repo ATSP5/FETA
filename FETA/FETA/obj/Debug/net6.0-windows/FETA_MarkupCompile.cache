@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Adam\CSRepositories\FETA\FETA\FETA\obj\Debug\net6.0-windows\
+D:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\obj\Debug\net6.0-windows\
 FETA
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Adam\CSRepositories\FETA\FETA\FETA\App.xaml
+D:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\App.xaml
 3-1530167499
 
 14240505910
-196-1514303514
+1961030365414
 MainWindow.xaml;View\AboutView.xaml;View\EncryptDecryptView.xaml;
 
 False
