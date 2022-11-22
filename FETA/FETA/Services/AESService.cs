@@ -10,64 +10,85 @@ namespace FETA.Services
 {
     public interface IAESService
     {
-        (bool isSuccesful, string msg, byte[] secretText) Encrypt(string plainText, string Key);
-        (bool isSuccesful, string msg, string plainText) Decrypt(byte[] secretText, string Key);
+        void SetKey(string key);
+        void SetZeroKey();
+        byte[] Encrypt(string plainText);
+        string Decrypt(byte[] cipherText);
     }
     public class AESService : IAESService
     {
-        public (bool isSuccesful, string msg, byte[] secretText) Encrypt(string plainText, string Key)
+        public AESService()
         {
-            (bool isSuccesful, string msg, byte[] secretText) Result = new() { isSuccesful = false, msg = "", secretText = null };
-            try
-            {
-                using (AesManaged aes = new AesManaged())
-                {
-                    // Encrypt string    
-                    aes.BlockSize = 256;
-                    aes.KeySize = 16;
-                    Result.secretText = EncryptRoutine(plainText,Adjust(Key, aes.KeySize), aes.IV);
-                    Result.isSuccesful = true;
-                    Result.msg = "OK";
-                }
-            }
-            catch (Exception exp)
-            {
-                Result.isSuccesful =false;
-                Result.msg = exp.Message;
-            }
-            return Result;
+            AESKEY = APaes.Key;
+            AESIV = APaes.IV;
+            IsKeySet = false;
+        }
+        private byte[] AESKEY;
+        private byte[] AESIV;
+        AesManaged APaes = new AesManaged();
+        bool IsKeySet;
+        public bool _isKeySet
+        {
+            get { return IsKeySet; }
+            private set { IsKeySet = value; }
         }
 
-        public (bool isSuccesful, string msg, string plainText) Decrypt(byte[] secretText, string Key)
+        public void SetZeroKey()
         {
-            (bool isSuccesful, string msg, string plainText) Result = new() { isSuccesful = false, msg = "", plainText = "" };
-            try
+            for (int i = 0; i < 32; i++)
             {
-                using (AesManaged aes = new AesManaged())
+                AESKEY[i] = 0;
+            }
+            for (int i = 0; i < 16; i++)
+            {
+                AESIV[i] = 0;
+            }
+            IsKeySet = false;
+        }
+        public void SetKey(string key)
+        {
+            byte[] fullkey = Encoding.Default.GetBytes(key);
+            if (fullkey.Length < 32)
+            {
+                for (int i = 0; i < 32; i++)
                 {
-                    // Encrypt string    
-                    aes.BlockSize = 256;
-                    aes.KeySize = 16;
-                    Result.plainText= DecryptRoutine(secretText,Adjust(Key, aes.KeySize), aes.IV);
-                    Result.isSuccesful = true;
-                    Result.msg = "OK";
+                    AESKEY[i] = fullkey[i % fullkey.Length];
+                }
+                for (int i = 0; i < 16; i++)
+                {
+                    AESIV[i] = AESKEY[i];
                 }
             }
-            catch (Exception exp)
+            if (fullkey.Length > 32)
             {
-                Result.isSuccesful = false;
-                Result.msg = exp.Message;
+                for (int i = 0; i < 32; i++)
+                {
+                    AESKEY[i] = fullkey[i];
+                }
+                for (int i = 0; i < 16; i++)
+                {
+                    AESIV[i] = AESKEY[i];
+                }
             }
-            return Result;
+            if (fullkey.Length == 32)
+            {
+                AESKEY = fullkey;
+                for (int i = 0; i < 16; i++)
+                {
+                    AESIV[i] = AESKEY[i];
+                }
+            }
+            IsKeySet = true;
         }
-        private byte[] EncryptRoutine(string plainText, byte[] Key, byte[] IV)
+
+        public byte[] Encrypt(string plainText)
         {
             byte[] encrypted;
             // Create a new AesManaged.    
             using (AesManaged aes = new AesManaged())
             {
                 // Create encryptor    
-                ICryptoTransform encryptor = aes.CreateEncryptor(Key, IV);
+                ICryptoTransform encryptor = aes.CreateEncryptor(AESKEY, AESIV);
                 // Create MemoryStream    
                 using (MemoryStream ms = new MemoryStream())
                 {
@@ -86,14 +107,15 @@ namespace FETA.Services
             // Return encrypted data    
             return encrypted;
         }
-        private string DecryptRoutine(byte[] cipherText, byte[] Key, byte[] IV)
+
+        public string Decrypt(byte[] cipherText)
         {
             string plaintext = null;
             // Create AesManaged    
             using (AesManaged aes = new AesManaged())
             {
                 // Create a decryptor    
-                ICryptoTransform decryptor = aes.CreateDecryptor(Key, IV);
+                ICryptoTransform decryptor = aes.CreateDecryptor(AESKEY, AESIV);
                 // Create the streams used for decryption.    
                 using (MemoryStream ms = new MemoryStream(cipherText))
                 {
@@ -107,23 +129,6 @@ namespace FETA.Services
                 }
             }
             return plaintext;
-        }
-
-       private byte [] Adjust(string value, int length)
-        {
-            byte[] buffer = new byte[length];
-            for(int i = 0; i < length; i++)
-            {
-                if(value[i] != 0)
-                {
-                    buffer[i] = (byte)value[i];
-                }
-                else
-                {
-                    buffer[i] = (byte)value[i%value.Length];
-                }
-            }
-            return buffer;
         }
     }
 }

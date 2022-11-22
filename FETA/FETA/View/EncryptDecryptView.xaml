@@ -76,7 +76,7 @@
                     BorderBrush="{StaticResource MaterialDesignDarkBackground}"
                     Content="Process"
                     Command="{Binding Process}"
-                    CommandParameter="{Binding ElementName=pbMainPasswordBox}"
+                    CommandParameter="{Binding ElementName=pbPasswordBox}"
                     Margin="10" Cursor="Hand" />
         </StackPanel>
     </Grid>

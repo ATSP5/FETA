@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -69,8 +70,8 @@ namespace FETA.ViewModel
                                 if (sfd.ShowDialog() == true)
                                 {
                                     EncryptDecryptModel_O.IsDestinationFileChoosed = true;
-                                    EncryptDecryptModel_O.SourceFilePath.Clear();
-                                    EncryptDecryptModel_O.SourceFilePath.Append(sfd.FileName);
+                                    EncryptDecryptModel_O.DestinationFilePath.Clear();
+                                    EncryptDecryptModel_O.DestinationFilePath.Append(sfd.FileName);
                                 }
                             },
                             (object o) =>
@@ -97,7 +98,16 @@ namespace FETA.ViewModel
                                 if(o is PasswordBox)
                                 {
                                     var psswBox = (o as PasswordBox);
-
+                                    bool encrypt = false;
+                                    if(EncryptDecryptModel_O.EnDeAction==EDAction.Encrypt)
+                                    {
+                                        encrypt = true;
+                                    }
+                                    var fileTransactionResult=_fileTransactionService.SaveProcessedFile((EncryptDecryptModel_O.SourceFilePath.ToString(), EncryptDecryptModel_O.DestinationFilePath.ToString()), encrypt, psswBox);
+                                    if (fileTransactionResult.isSuccesful == false)
+                                    {
+                                        MessageBox.Show(fileTransactionResult.msg,"ERROR!",MessageBoxButton.OK,MessageBoxImage.Error);
+                                    }
                                 }
                             },
                             (object o) =>
