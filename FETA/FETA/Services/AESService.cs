@@ -17,11 +17,13 @@ namespace FETA.Services
     }
     public class AESService : IAESService
     {
+        private PaddingMode _paddingMode;
         public AESService()
         {
             AESKEY = APaes.Key;
             AESIV = APaes.IV;
             IsKeySet = false;
+            _paddingMode = PaddingMode.Zeros;
         }
         private byte[] AESKEY;
         private byte[] AESIV;
@@ -47,7 +49,7 @@ namespace FETA.Services
         }
         public void SetKey(string key)
         {
-            byte[] fullkey = Encoding.Default.GetBytes(key);
+            byte[] fullkey = Encoding.UTF8.GetBytes(key);
             if (fullkey.Length < 32)
             {
                 for (int i = 0; i < 32; i++)
@@ -87,6 +89,7 @@ namespace FETA.Services
             // Create a new AesManaged.    
             using (AesManaged aes = new AesManaged())
             {
+                aes.Padding = _paddingMode;
                 // Create encryptor    
                 ICryptoTransform encryptor = aes.CreateEncryptor(AESKEY, AESIV);
                 // Create MemoryStream    
@@ -114,6 +117,7 @@ namespace FETA.Services
             // Create AesManaged    
             using (AesManaged aes = new AesManaged())
             {
+                aes.Padding = _paddingMode;
                 // Create a decryptor    
                 ICryptoTransform decryptor = aes.CreateDecryptor(AESKEY, AESIV);
                 // Create the streams used for decryption.    

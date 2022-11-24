@@ -34,8 +34,11 @@ namespace FETA.ViewModel
                             (object o ) =>
                             {
                                 var ofd = new OpenFileDialog();
-                                ofd.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-                                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                                if (EncryptDecryptModel_O.UseStringFileFormat == true || EncryptDecryptModel_O.EnDeAction == EDAction.Encrypt)
+                                    ofd.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                                else
+                                    ofd.Filter = "Text files (*.fta)|*.fta|All files (*.*)|*.*";
+                                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                                 if (ofd.ShowDialog() == true)
                                 {
                                     EncryptDecryptModel_O.IsSourceFileLoaded = true;
@@ -65,8 +68,11 @@ namespace FETA.ViewModel
                             (object o) =>
                             {
                                 var sfd = new SaveFileDialog();
-                                sfd.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-                                sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                                if(EncryptDecryptModel_O.UseStringFileFormat==true || EncryptDecryptModel_O.EnDeAction==EDAction.Decrypt)
+                                    sfd.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                                else
+                                    sfd.Filter = "Text files (*.fta)|*.fta|All files (*.*)|*.*";
+                                sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                                 if (sfd.ShowDialog() == true)
                                 {
                                     EncryptDecryptModel_O.IsDestinationFileChoosed = true;
@@ -103,7 +109,7 @@ namespace FETA.ViewModel
                                     {
                                         encrypt = true;
                                     }
-                                    var fileTransactionResult=_fileTransactionService.SaveProcessedFile((EncryptDecryptModel_O.SourceFilePath.ToString(), EncryptDecryptModel_O.DestinationFilePath.ToString()), encrypt, psswBox);
+                                    var fileTransactionResult=_fileTransactionService.SaveProcessedFile((EncryptDecryptModel_O.SourceFilePath.ToString(), EncryptDecryptModel_O.DestinationFilePath.ToString()), (encrypt, EncryptDecryptModel_O.UseStringFileFormat), psswBox);
                                     if (fileTransactionResult.isSuccesful == false)
                                     {
                                         MessageBox.Show(fileTransactionResult.msg,"ERROR!",MessageBoxButton.OK,MessageBoxImage.Error);

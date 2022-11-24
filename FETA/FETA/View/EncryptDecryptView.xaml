@@ -49,7 +49,7 @@
             <CheckBox Margin="10"
                       Content="Use String Format"
                       Foreground="White"
-                      IsChecked="{Binding Path=EncryptDecryptModel_O.UseStringFormat}"
+                      IsChecked="{Binding Path=EncryptDecryptModel_O.UseStringFileFormat}"
                 />
            
         </StackPanel>
