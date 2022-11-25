@@ -13,7 +13,6 @@ namespace FETA.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
             if (((string)parameter == "D" && (EDAction)value == EDAction.Decrypt) || ((string)parameter == "E" && (EDAction)value == EDAction.Encrypt))
             {
                 return true;

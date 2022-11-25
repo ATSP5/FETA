@@ -1,0 +1,9 @@
+Wersja 1.2.1
+
+Program napisany przez mgr n. farm., mgr inż. Adama Prukałę.
+
+Program wczytuje plik źródłowy oraz ustawia plik docelowy.
+Możliwe jest enkrypcja i dekrypcja pliku z wykorzystaniem 
+algorytmu AES oraz 32'bajtowego hasła. Możliwe także jest
+hashowanie tekstu i porównywanie hashów. 
+

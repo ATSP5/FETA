@@ -8,13 +8,22 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:modelViews="clr-namespace:FETA.ViewModel"
         xmlns:views="clr-namespace:FETA.View"
-       Title="File Encryption Tool Advanced - FETA" Height="450" Width="800">
+        Title="File Encryption Tool Advanced - FETA" 
+        MinHeight="450"
+        Height="450" 
+        Width ="1200" 
+        MinWidth="1200">
 
     <Window.Resources>
 
         <DataTemplate x:Name="aboutViewTemplate"
                       DataType="{x:Type modelViews:AboutViewModel}">
             <views:AboutView DataContext="{Binding}" />
+        </DataTemplate>
+        
+        <DataTemplate x:Name="hashViewTemplate"
+                      DataType="{x:Type modelViews:HashViewModel}">
+            <views:HashView DataContext="{Binding}" />
         </DataTemplate>
 
         <DataTemplate x:Name="encryptDecryptViewTemplate"
@@ -38,8 +47,20 @@
                     Name="btnEncryptDecrypt"
                     Width="60"
                     Height="40"
-                    Click="btnEncryptDecrypt_Click"
+                    Click="btnEncryptDecrypt_Click" Cursor="Hand"
                      />
+            <Button Content="{materialDesign:PackIcon Kind=Hashtag,Size=30}"
+                    ToolTip="Encrypt Decrypt"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Foreground="White"
+                    Margin="0,0,0,10"
+                    Name="btnSha"
+                    Width="60"
+                    Height="40"
+                    Click="btnSha_Click"  Cursor="Hand"
+                     />
+
 
             <Button Content="{materialDesign:PackIcon Kind=About,Size=30}"
                     ToolTip="About"

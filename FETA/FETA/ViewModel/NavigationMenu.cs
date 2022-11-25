@@ -10,10 +10,13 @@ namespace FETA.ViewModel
     {
         public AboutViewModel AboutViewModel_O { get; set; }
         public EncryptDecryptViewModel EncryptDecryptViewModel_O { get; set; }  
+        public HashViewModel HashViewModel_O { get; set; }
+
         public NavigationMenu()
         {
             AboutViewModel_O = new AboutViewModel();
             EncryptDecryptViewModel_O = new EncryptDecryptViewModel();
+            HashViewModel_O = new HashViewModel();
         }
     }
 }

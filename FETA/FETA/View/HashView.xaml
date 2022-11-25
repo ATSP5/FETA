@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="FETA.View.HashView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FETA.View"
+             mc:Ignorable="d" 
+             xmlns:conv="clr-namespace:FETA.Converters"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <conv:HCActionConverter x:Key="hcActionConverterKey" />
+    </UserControl.Resources>
+    
+    <Grid Background="#FF403D3D">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="130"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Border BorderBrush="White" BorderThickness="2" CornerRadius="8,8,8,8" Margin="10" Grid.Column="0">
+            <ScrollViewer VerticalScrollBarVisibility="Visible"
+                      HorizontalScrollBarVisibility="Disabled">
+                <StackPanel >
+                    <TextBlock
+                    Text="Input"
+                    Foreground="White"
+                    FontSize="15"
+                    HorizontalAlignment="Center"
+                    Margin="10"/>
+                    <TextBox
+                Margin="10"
+                Foreground="White"
+                AcceptsReturn="True"
+                Text="{Binding Path=HashModel_O.Input}"/>
+
+                    <TextBlock
+                    Text="Seed"
+                    Foreground="White"
+                    FontSize="15"
+                    HorizontalAlignment="Center"
+                    Margin="10"/>
+                    <TextBox
+                Margin="10"
+                AcceptsReturn="True"
+                Foreground="White"
+                Text="{Binding Path=HashModel_O.Seed}"
+                />
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <Border BorderBrush="White" BorderThickness="2" CornerRadius="8,8,8,8" Margin="10" Grid.Column="1">
+            <StackPanel  >
+
+                <RadioButton Margin="10,5" 
+                         Name="rbtnHash"
+                         Content="Hash" 
+                         GroupName="HAS"
+                         Foreground="White"
+                         IsChecked="{Binding HashModel_O.HCAction, 
+                Converter={StaticResource ResourceKey=hcActionConverterKey}, 
+                ConverterParameter=H}"
+                         />
+
+                <RadioButton Margin="10,5" 
+                         Content="Compare" 
+                         Name="rbtnCompare"
+                         GroupName="HAS"
+                         Foreground="White"
+                         IsChecked="{Binding HashModel_O.HCAction, 
+                Converter={StaticResource ResourceKey=hcActionConverterKey}, 
+                ConverterParameter=C}"
+                         />
+
+                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    Background="{StaticResource MaterialDesignDarkBackground}"
+                    BorderBrush="{StaticResource MaterialDesignDarkBackground}"
+                    Content="Process"
+                    Command="{Binding Process}"
+                    Margin="10" Cursor="Hand" />
+            </StackPanel>
+        </Border>
+        <Border BorderBrush="White" BorderThickness="2" CornerRadius="8,8,8,8" Margin="10" Grid.Column="2">
+            <ScrollViewer VerticalScrollBarVisibility="Visible"
+                      HorizontalScrollBarVisibility="Disabled">
+                <StackPanel >
+                    <TextBlock
+                    Text="{Binding Path=HashModel_O.IOLabel}"
+                    Foreground="White"
+                    FontSize="15"
+                    HorizontalAlignment="Center"
+                    Margin="10"
+                    />
+                    <TextBox
+                Margin="10"
+                AcceptsReturn="True"
+                Foreground="White"
+                Text="{Binding Path=HashModel_O.Output}"
+                />
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>

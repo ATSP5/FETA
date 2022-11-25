@@ -38,5 +38,10 @@ namespace FETA
         {
             DataContext = _navigationMenu.EncryptDecryptViewModel_O;
         }
+
+        private void btnSha_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = _navigationMenu.HashViewModel_O;
+        }
     }
 }
