@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "S/BTvkEyKo7TMfK2BfK2ItTsUxF7j/ZLxt0whVmDwgb3cYdz1Kcu36T7Tqnj3qBk15yptB2qfrJAru0V6JGUJg==",
+  "dgSpecHash": "3cTRunQg24Imt4W2JDV+KU2BfrCwcRh3PVZTJDrssYilQfttp1/ZeZ6e9+H2RGCIzcMD3TbvUGd6wod8+89dfw==",
   "success": true,
-  "projectFilePath": "d:\\Adam\\GitHubWorkspace\\FETA\\FETA\\FETA\\FETA\\FETA.csproj",
+  "projectFilePath": "D:\\Adam\\GitHubWorkspace\\FETA\\FETA\\FETA\\FETA\\FETA.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Adam\\.nuget\\packages\\materialdesigncolors\\2.0.9\\materialdesigncolors.2.0.9.nupkg.sha512",
     "C:\\Users\\Adam\\.nuget\\packages\\materialdesignthemes\\4.6.1\\materialdesignthemes.4.6.1.nupkg.sha512"
