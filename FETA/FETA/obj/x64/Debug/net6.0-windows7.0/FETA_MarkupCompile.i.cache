@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-d:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\obj\x64\Debug\net6.0-windows7.0\
+D:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\obj\x64\Debug\net6.0-windows7.0\
 FETA
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-d:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\App.xaml
+D:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\App.xaml
 4-1720783944
 1-904943819
 22-186287140
 1961030365414
 MainWindow.xaml;View\AboutView.xaml;View\EncryptDecryptView.xaml;View\HashView.xaml;
 
-True
+False
 

@@ -132,7 +132,7 @@ namespace FETA.Services
                     }
                 }
             }
-            return plaintext;
+            return plaintext.Replace("\0", string.Empty);
         }
     }
 }
