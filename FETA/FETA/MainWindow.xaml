@@ -9,8 +9,8 @@
         xmlns:modelViews="clr-namespace:FETA.ViewModel"
         xmlns:views="clr-namespace:FETA.View"
         Title="File Encryption Tool Advanced - FETA" 
-        MinHeight="450"
-        Height="450" 
+        MinHeight="500"
+        Height="500" 
         Width ="1200" 
         MinWidth="1200">
 
@@ -31,6 +31,11 @@
             <views:EncryptDecryptView DataContext="{Binding}" />
         </DataTemplate>
 
+        <DataTemplate x:Name="encryptDecryptDataViewTemplate"
+                      DataType="{x:Type modelViews:EncryptDecryptDataViewModel}">
+            <views:EncryptDecryptDataView DataContext="{Binding}" />
+        </DataTemplate>
+
     </Window.Resources>
 
     <DockPanel Background="#FF010030">
@@ -44,10 +49,22 @@
                     BorderBrush="Transparent"
                     Foreground="White"
                     Margin="0,0,0,10"
-                    Name="btnEncryptDecrypt"
+                    Name="btnEncryptDecryptData"
                     Width="60"
                     Height="40"
-                    Click="btnEncryptDecrypt_Click" Cursor="Hand"
+                    Click="btnEncryptDecryptData_Click" Cursor="Hand"
+                     />
+
+            <Button Content="{materialDesign:PackIcon Kind=FileLockOutline,Size=30}"
+                    ToolTip="Encrypt Decrypt"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Foreground="White"
+                    Margin="0,0,0,10"
+                    Name="btnEncryptDecryptFile"
+                    Width="60"
+                    Height="40"
+                    Click="btnEncryptDecryptFile_Click" Cursor="Hand"
                      />
             <Button Content="{materialDesign:PackIcon Kind=Hashtag,Size=30}"
                     ToolTip="Encrypt Decrypt"

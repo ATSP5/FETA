@@ -16,7 +16,7 @@ namespace FETA.Model
             IsSourceFileLoaded = false;
             OutputStringFormat = false;
             IsDestinationFileChoosed = false;
-            UseStringFileFormat = true;
+            UseStringFileFormat = false;
             SourceFilePath = new StringBuilder();
             DestinationFilePath = new StringBuilder();
         }

@@ -26,7 +26,7 @@ namespace FETA
         {
             InitializeComponent();
             _navigationMenu = new NavigationMenu();
-            DataContext = _navigationMenu.EncryptDecryptViewModel_O;
+            DataContext = _navigationMenu.EncryptDecryptDataViewModel_O;
         }
 
         private void btnAbout_Click(object sender, RoutedEventArgs e)
@@ -34,14 +34,19 @@ namespace FETA
             DataContext = _navigationMenu.AboutViewModel_O;
         }
 
-        private void btnEncryptDecrypt_Click(object sender, RoutedEventArgs e)
+        private void btnSha_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = _navigationMenu.HashViewModel_O;
+        }
+
+        private void btnEncryptDecryptFile_Click(object sender, RoutedEventArgs e)
         {
             DataContext = _navigationMenu.EncryptDecryptViewModel_O;
         }
 
-        private void btnSha_Click(object sender, RoutedEventArgs e)
+        private void btnEncryptDecryptData_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = _navigationMenu.HashViewModel_O;
+            DataContext= _navigationMenu.EncryptDecryptDataViewModel_O;
         }
     }
 }

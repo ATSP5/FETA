@@ -31,3 +31,5 @@ d:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\obj\x64\Debug\net6.0-windows7.0\refi
 d:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\obj\x64\Debug\net6.0-windows7.0\FETA.pdb
 d:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\obj\x64\Debug\net6.0-windows7.0\FETA.genruntimeconfig.cache
 d:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\obj\x64\Debug\net6.0-windows7.0\ref\FETA.dll
+D:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\obj\x64\Debug\net6.0-windows7.0\View\EncryptDecryptDataView.g.cs
+D:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\obj\x64\Debug\net6.0-windows7.0\View\EncryptDecryptDataView.baml

@@ -1,9 +1,13 @@
-Wersja 1.2.1
+Wersja 1.3.1
 
 Program napisany przez mgr n. farm., mgr inż. Adama Prukałę.
 
-Program wczytuje plik źródłowy oraz ustawia plik docelowy.
-Możliwe jest enkrypcja i dekrypcja pliku z wykorzystaniem 
-algorytmu AES oraz 32'bajtowego hasła. Możliwe także jest
-hashowanie tekstu i porównywanie hashów. 
+Pierwszy panel służy do tworzenia zaszyfrowanego tekstu przy
+użyciu algorytmu AES. 
+
+Drugi panel umożliwia wczytywanie pliku źródłowego oraz ustawia
+plik docelowy. Możliwe jest enkrypcja i dekrypcja pliku 
+z wykorzystaniem algorytmu AES oraz 32'bajtowego hasła. 
+
+Trzeci panel umożliwia hashowanie tekstu i porównywanie hashów. 
 

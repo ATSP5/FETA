@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="FETA.View.EncryptDecryptDataView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FETA.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="#FF2B2929">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Margin="30" Background="#FF3A3A3A">
+            <TextBlock
+                Text="Input"
+                Foreground="White"
+                HorizontalAlignment="Center"
+                FontSize="30"
+                />
+            <TextBox
+                Style="{StaticResource MaterialDesignTextBox}"
+                TextWrapping="Wrap"
+                AcceptsReturn="True"
+                VerticalScrollBarVisibility="Visible"
+                MinHeight="300"
+                MinWidth="100"
+                Padding="10"
+                Foreground="White"
+                Text="{Binding Path=EncryptDecryptDataModel_O.Input}"
+                />
+            <PasswordBox
+                HorizontalAlignment="Center"
+                MinHeight="30"
+                Margin="5"
+                Foreground="White"
+                Name="pbPassword"
+                MinWidth="250"
+                />
+        </StackPanel>
+        <StackPanel Grid.Column="1" Margin="30" Background="#FF3A3A3A">
+            <TextBlock
+                Text="Output"
+                Foreground="White"
+                HorizontalAlignment="Center"
+                FontSize="30"
+                />
+            <TextBox
+                Style="{StaticResource MaterialDesignTextBox}"
+                TextWrapping="Wrap"
+                AcceptsReturn="True"
+                VerticalScrollBarVisibility="Visible"
+                MinHeight="300"
+                MinWidth="100"
+                Padding="10"
+                Foreground="White"
+                Text="{Binding Path=EncryptDecryptDataModel_O.Output}"
+                />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <ComboBox
+                    MinHeight="30"
+                    MinWidth="150"
+                    Margin="15"
+                    Foreground="White"
+                    ItemsSource="{Binding Path=EncryptDecryptDataModel_O.Modes}"
+                    SelectedItem="{Binding Path=EncryptDecryptDataModel_O.Mode}"
+                    />
+              
+                <Button
+                    Content="Process"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    Background="{StaticResource MaterialDesignDarkBackground}"
+                    BorderBrush="{StaticResource MaterialDesignDarkBackground}"
+                    CommandParameter="{Binding ElementName=pbPassword}"
+                    Command="{Binding Process}"
+                    Margin="5"
+                    />
+                <Button
+                    Content="Copy"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    Background="{StaticResource MaterialDesignDarkBackground}"
+                    BorderBrush="{StaticResource MaterialDesignDarkBackground}"
+                    CommandParameter="{Binding ElementName=pbPassword}"
+                    Command="{Binding Copy}"
+                     Margin="5"
+                    />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

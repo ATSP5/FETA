@@ -31,3 +31,5 @@ d:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\obj\x64\Release\net6.0-windows7.0\FE
 d:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\obj\x64\Release\net6.0-windows7.0\ref\FETA.dll
 d:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\obj\x64\Release\net6.0-windows7.0\View\HashView.g.cs
 d:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\obj\x64\Release\net6.0-windows7.0\View\HashView.baml
+D:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\obj\x64\Release\net6.0-windows7.0\View\EncryptDecryptDataView.g.cs
+D:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\obj\x64\Release\net6.0-windows7.0\View\EncryptDecryptDataView.baml

@@ -10,11 +10,11 @@ none
 false
 TRACE;RELEASE;NET;NET6_0;NETCOREAPP
 D:\Adam\GitHubWorkspace\FETA\FETA\FETA\FETA\App.xaml
-4-1720783944
+5-35800330
 1-904943819
-22-1940931743
+252119103413
 1961030365414
-MainWindow.xaml;View\AboutView.xaml;View\EncryptDecryptView.xaml;View\HashView.xaml;
+MainWindow.xaml;View\AboutView.xaml;View\EncryptDecryptDataView.xaml;View\EncryptDecryptView.xaml;View\HashView.xaml;
 
 False
 
