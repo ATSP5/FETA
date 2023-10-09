@@ -16,7 +16,6 @@ namespace FETA.Model
             IsSourceFileLoaded = false;
             OutputStringFormat = false;
             IsDestinationFileChoosed = false;
-            UseStringFileFormat = false;
             SourceFilePath = new StringBuilder();
             DestinationFilePath = new StringBuilder();
         }
@@ -76,19 +75,5 @@ namespace FETA.Model
                 OnPropertyChanged(nameof(IsDestinationFileChoosed));
             }
         }
-        private bool _useStringFileFormat;
-        public bool UseStringFileFormat
-        {
-            get
-            {
-                return _useStringFileFormat;
-            }
-            set
-            {
-                _useStringFileFormat = value;
-                OnPropertyChanged(nameof(UseStringFileFormat));
-            }
-        }
-
     }
 }

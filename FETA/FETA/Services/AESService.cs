@@ -14,6 +14,9 @@ namespace FETA.Services
         void SetZeroKey();
         byte[] Encrypt(string plainText);
         string Decrypt(byte[] cipherText);
+        void EncryptFile(string sourcePath, string destPath);
+
+        void DecryptFile(string sourcePath, string destPath);
     }
     public class AESService : IAESService
     {
@@ -134,5 +137,52 @@ namespace FETA.Services
             }
             return plaintext.Replace("\0", string.Empty);
         }
+
+
+        public void EncryptFile(string sourcePath, string destPath)
+        {
+            using (Aes aes = Aes.Create())
+            {
+                aes.Key = AESKEY;
+                aes.GenerateIV(); // Generate a random IV for encryption.
+
+                using (FileStream inputStream = File.OpenRead(sourcePath))
+                using (FileStream outputStream = File.Create(destPath))
+                {
+                    // Write IV to the output file
+                    outputStream.Write(aes.IV, 0, aes.IV.Length);
+
+                    using (CryptoStream cryptoStream = new CryptoStream(outputStream, aes.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        // Encrypt the file
+                        inputStream.CopyTo(cryptoStream);
+                    }
+                }
+            }
+        }
+
+        public void DecryptFile(string sourcePath, string destPath)
+        {
+            using (Aes aes = Aes.Create())
+            {
+                aes.Key = AESKEY;
+
+                using (FileStream inputStream = File.OpenRead(sourcePath))
+                using (FileStream outputStream = File.Create(destPath))
+                {
+                    // Read IV from the input file
+                    byte[] iv = new byte[16];
+                    inputStream.Read(iv, 0, iv.Length);
+                    aes.IV = iv;
+
+                    using (CryptoStream cryptoStream = new CryptoStream(inputStream, aes.CreateDecryptor(), CryptoStreamMode.Read))
+                    {
+                        // Decrypt the file
+                        cryptoStream.CopyTo(outputStream);
+                    }
+                }
+            }
+        }
+
     }
 }

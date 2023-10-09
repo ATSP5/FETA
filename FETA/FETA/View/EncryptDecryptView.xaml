@@ -46,12 +46,7 @@
                       IsEnabled="False"
                       IsChecked="{Binding Path=EncryptDecryptModel_O.IsSourceFileLoaded}"
                 />
-            <CheckBox Margin="10"
-                      Content="Use String Format"
-                      Foreground="White"
-                      IsChecked="{Binding Path=EncryptDecryptModel_O.UseStringFileFormat}"
-                />
-           
+
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="30" Background="#FF3A3A3A">
             <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"

@@ -34,10 +34,10 @@ namespace FETA.ViewModel
                             (object o ) =>
                             {
                                 var ofd = new OpenFileDialog();
-                                if (EncryptDecryptModel_O.UseStringFileFormat == true || EncryptDecryptModel_O.EnDeAction == EDAction.Encrypt)
-                                    ofd.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-                                else
+                                if (EncryptDecryptModel_O.EnDeAction== EDAction.Decrypt)
                                     ofd.Filter = "Text files (*.fta)|*.fta|All files (*.*)|*.*";
+                                else
+                                    ofd.Filter = "All files (*.*)|*.*";
                                 ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                                 if (ofd.ShowDialog() == true)
                                 {
@@ -68,10 +68,10 @@ namespace FETA.ViewModel
                             (object o) =>
                             {
                                 var sfd = new SaveFileDialog();
-                                if(EncryptDecryptModel_O.UseStringFileFormat==true || EncryptDecryptModel_O.EnDeAction==EDAction.Decrypt)
-                                    sfd.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-                                else
+                                if (EncryptDecryptModel_O.EnDeAction == EDAction.Encrypt)
                                     sfd.Filter = "Text files (*.fta)|*.fta|All files (*.*)|*.*";
+                                else
+                                    sfd.Filter = "All files (*.*)|*.*";
                                 sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                                 if (sfd.ShowDialog() == true)
                                 {
@@ -109,11 +109,17 @@ namespace FETA.ViewModel
                                     {
                                         encrypt = true;
                                     }
-                                    var fileTransactionResult=_fileTransactionService.SaveProcessedFile((EncryptDecryptModel_O.SourceFilePath.ToString(), EncryptDecryptModel_O.DestinationFilePath.ToString()), (encrypt, EncryptDecryptModel_O.UseStringFileFormat), psswBox);
+                                    var fileTransactionResult=_fileTransactionService.SaveProcessedFile((EncryptDecryptModel_O.SourceFilePath.ToString(), EncryptDecryptModel_O.DestinationFilePath.ToString()), encrypt, psswBox);
                                     if (fileTransactionResult.isSuccesful == false)
                                     {
                                         MessageBox.Show(fileTransactionResult.msg,"ERROR!",MessageBoxButton.OK,MessageBoxImage.Error);
                                     }
+                                    EncryptDecryptModel_O.IsSourceFileLoaded = false;
+                                    EncryptDecryptModel_O.OutputStringFormat = false;
+                                    EncryptDecryptModel_O.IsDestinationFileChoosed = false;
+                                    EncryptDecryptModel_O.SourceFilePath = new StringBuilder();
+                                    EncryptDecryptModel_O.DestinationFilePath = new StringBuilder();
+                                    psswBox.Password = "";
                                 }
                             },
                             (object o) =>
