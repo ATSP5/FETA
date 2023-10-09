@@ -13,7 +13,10 @@ namespace FETA.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (((string)parameter == "D" && (EDAction)value == EDAction.Decrypt) || ((string)parameter == "E" && (EDAction)value == EDAction.Encrypt))
+            if (((string)parameter == "D" && (EDAction)value == EDAction.Decrypt) 
+                || ((string)parameter == "E" && (EDAction)value == EDAction.Encrypt) 
+                || ((string)parameter == "SH" && (EDAction)value == EDAction.ShaFile) 
+                || ((string)parameter == "MD" && (EDAction)value == EDAction.MDFile))
             {
                 return true;
             }
@@ -25,14 +28,16 @@ namespace FETA.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if((string)parameter=="E")
-            {
+            if((string)parameter=="E")          
                 return EDAction.Encrypt;
-            }
-            else
-            {
+            
+            else if((string)parameter=="D")           
                 return EDAction.Decrypt;
-            }
+           
+            else if ((string)parameter=="SH")
+                return EDAction.ShaFile;
+            else
+                return EDAction.MDFile;
         }
     }
 }

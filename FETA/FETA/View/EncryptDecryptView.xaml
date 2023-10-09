@@ -40,6 +40,22 @@
                 Converter={StaticResource ResourceKey=edaActionConverterKey}, 
                 ConverterParameter=D}"
                          />
+            <RadioButton Margin="10" 
+                         Content="Check SHA256 of the file" 
+                         GroupName="ENC"
+                         Foreground="White"
+                         IsChecked="{Binding EncryptDecryptModel_O.EnDeAction, 
+                Converter={StaticResource ResourceKey=edaActionConverterKey}, 
+                ConverterParameter=SH}"
+                         />
+            <RadioButton Margin="10" 
+                         Content="Check MD5 of the file" 
+                         GroupName="ENC"
+                         Foreground="White"
+                         IsChecked="{Binding EncryptDecryptModel_O.EnDeAction, 
+                Converter={StaticResource ResourceKey=edaActionConverterKey}, 
+                ConverterParameter=MD}"
+                         />
             <CheckBox Margin="10"
                       Content="Source file loaded?"
                       Foreground="White"
@@ -54,6 +70,7 @@
                                     BorderBrush="{StaticResource MaterialDesignDarkBackground}"
                                     Content="Choose Destination File"
                                     Command="{Binding ChooseDestinationFile}"
+                                    IsEnabled="{Binding Path=EncryptDecryptModel_O.IsEDMode}"
                                     Margin="10" Cursor="Hand" />
             <CheckBox Margin="10"
                       Content="Destination file choosed?"
@@ -61,10 +78,29 @@
                       IsEnabled="False"
                       IsChecked="{Binding Path=EncryptDecryptModel_O.IsDestinationFileChoosed}"/>
 
+            <TextBlock
+                Text="Password"
+                IsEnabled="{Binding Path=EncryptDecryptModel_O.IsEDMode}"
+                Foreground="White"
+                HorizontalAlignment="Center"
+                />
             <PasswordBox Style="{StaticResource MaterialDesignPasswordBox}"
                 Margin="10"
                 Name="pbPasswordBox"
+                IsEnabled="{Binding Path=EncryptDecryptModel_O.IsEDMode}"
                 Foreground="White"
+                />
+            <TextBlock
+                Text="Hash result"
+                IsEnabled="{Binding Path=EncryptDecryptModel_O.IsSMMode}"
+                Foreground="White"
+                HorizontalAlignment="Center"
+                />
+            <TextBox
+                Margin="10"
+                Foreground="White"
+                IsEnabled="{Binding Path=EncryptDecryptModel_O.IsSMMode}"
+                Text="{Binding Path=EncryptDecryptModel_O.HashValue}"
                 />
             <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     Background="{StaticResource MaterialDesignDarkBackground}"

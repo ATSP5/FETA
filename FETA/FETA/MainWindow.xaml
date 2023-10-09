@@ -44,7 +44,7 @@
                     Background="#99393838">
 
             <Button Content="{materialDesign:PackIcon Kind=Encryption,Size=30}"
-                    ToolTip="Encrypt Decrypt"
+                    ToolTip="Encrypt/Decrypt raw text"
                     Background="Transparent"
                     BorderBrush="Transparent"
                     Foreground="White"
@@ -56,7 +56,7 @@
                      />
 
             <Button Content="{materialDesign:PackIcon Kind=FileLockOutline,Size=30}"
-                    ToolTip="Encrypt Decrypt"
+                    ToolTip="Encrypt/Decrypt/Check Hash of file"
                     Background="Transparent"
                     BorderBrush="Transparent"
                     Foreground="White"
@@ -67,7 +67,7 @@
                     Click="btnEncryptDecryptFile_Click" Cursor="Hand"
                      />
             <Button Content="{materialDesign:PackIcon Kind=Hashtag,Size=30}"
-                    ToolTip="Encrypt Decrypt"
+                    ToolTip="Hash raw text"
                     Background="Transparent"
                     BorderBrush="Transparent"
                     Foreground="White"

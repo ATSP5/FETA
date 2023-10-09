@@ -17,10 +17,12 @@ namespace FETA.ViewModel
     {
         public EncryptDecryptModel EncryptDecryptModel_O { get; set; }
         private IFileTransactionService _fileTransactionService;
+        private ISHAService _shaService;
         public EncryptDecryptViewModel()
         {
             EncryptDecryptModel_O = new EncryptDecryptModel();
             _fileTransactionService = new FileTransactionService();
+            _shaService = new SHAService();
         }
         ICommand loadSourceFile = null;
         public ICommand LoadSourceFile
@@ -104,21 +106,31 @@ namespace FETA.ViewModel
                                 if(o is PasswordBox)
                                 {
                                     var psswBox = (o as PasswordBox);
-                                    bool encrypt = false;
-                                    if(EncryptDecryptModel_O.EnDeAction==EDAction.Encrypt)
+                                    if (psswBox == null)
+                                        return;
+                                    switch (EncryptDecryptModel_O.EnDeAction)
                                     {
-                                        encrypt = true;
+                                        case EDAction.Encrypt:
+                                            var fileTransactionResult = _fileTransactionService.SaveProcessedFile((EncryptDecryptModel_O.SourceFilePath.ToString(), EncryptDecryptModel_O.DestinationFilePath.ToString()), true, psswBox);
+                                            if (fileTransactionResult.isSuccesful == false)
+                                                MessageBox.Show(fileTransactionResult.msg, "ERROR!", MessageBoxButton.OK, MessageBoxImage.Error);                                  
+                                            break;
+                                        case EDAction.Decrypt:
+                                            fileTransactionResult = _fileTransactionService.SaveProcessedFile((EncryptDecryptModel_O.SourceFilePath.ToString(), EncryptDecryptModel_O.DestinationFilePath.ToString()), false, psswBox);
+                                            if (fileTransactionResult.isSuccesful == false)
+                                                MessageBox.Show(fileTransactionResult.msg, "ERROR!", MessageBoxButton.OK, MessageBoxImage.Error);
+                                            break;
+                                        case EDAction.ShaFile:
+                                            EncryptDecryptModel_O.HashValue = _shaService.ComputeFileHashSHA256(EncryptDecryptModel_O.SourceFilePath.ToString());
+                                            break;
+                                        case EDAction.MDFile:
+                                            EncryptDecryptModel_O.HashValue = _shaService.ComputeMD5Hash(EncryptDecryptModel_O.SourceFilePath.ToString());
+                                            break;
+                                            default:
+                                            MessageBox.Show("WRONG OPERATION!","ERROR!", MessageBoxButton.OK, MessageBoxImage.Error);
+                                            break;
                                     }
-                                    var fileTransactionResult=_fileTransactionService.SaveProcessedFile((EncryptDecryptModel_O.SourceFilePath.ToString(), EncryptDecryptModel_O.DestinationFilePath.ToString()), encrypt, psswBox);
-                                    if (fileTransactionResult.isSuccesful == false)
-                                    {
-                                        MessageBox.Show(fileTransactionResult.msg,"ERROR!",MessageBoxButton.OK,MessageBoxImage.Error);
-                                    }
-                                    EncryptDecryptModel_O.IsSourceFileLoaded = false;
-                                    EncryptDecryptModel_O.OutputStringFormat = false;
-                                    EncryptDecryptModel_O.IsDestinationFileChoosed = false;
-                                    EncryptDecryptModel_O.SourceFilePath = new StringBuilder();
-                                    EncryptDecryptModel_O.DestinationFilePath = new StringBuilder();
+                                    EncryptDecryptModel_O.Reset(false);
                                     psswBox.Password = "";
                                 }
                             },
