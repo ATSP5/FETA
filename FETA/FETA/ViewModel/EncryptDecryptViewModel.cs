@@ -132,6 +132,7 @@ namespace FETA.ViewModel
                                     }
                                     EncryptDecryptModel_O.Reset(false);
                                     psswBox.Password = "";
+                                    MessageBox.Show("Process done!");
                                 }
                             },
                             (object o) =>
